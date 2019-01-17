@@ -11,9 +11,12 @@ tested with:
 Before removing the sd card from your imaging host, re-mount or ensure that sd card is still mounted.
 
 Create a blank file file ssh in boot path:
+```
 touch <sdcard>/boot/ssh
+```
 
 Setup the wifi config:
+```
 cat << 'EOF' > <sdcard>/boot/wpa_supplicant.config
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -25,7 +28,7 @@ network={
 	scan_ssid=1
 }
 EOF
-
+```
 
 Unmount the sd card and insert in your pi zero.
 
@@ -34,10 +37,11 @@ Unmount the sd card and insert in your pi zero.
 
 ssh to your pi and run the following commands:
 
+```
 sudo apt-get update && sudo apt-get install -y git
 
 git clone https://github.com/jonberenguer/pi-meh.git && \
   cd pi-meh && \
   sudo ./setup.sh
-
+```
 
