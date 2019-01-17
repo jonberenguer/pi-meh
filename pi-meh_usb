@@ -55,6 +55,8 @@ ln -s functions/hid.usb0 configs/c.1/
 ls /sys/class/udc > UDC
 
 ifconfig usb0 172.16.254.1 netmask 255.255.255.252 up
-route add -net default gw 172.16.254.2
-systemctl start dhcpd
+#route add -net default gw 172.16.254.2
 
+systemctl start dnsmasq
+
+exit 0

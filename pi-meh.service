@@ -1,0 +1,12 @@
+[Unit]
+Description=pi-meh
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/pi-meh_usb
+WorkingDirectory=/root
+Restart=no
+User=root
+
+[Install]
+WantedBy=multi-user.target
