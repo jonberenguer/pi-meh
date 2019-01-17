@@ -14,3 +14,10 @@ dd if=/dev/zero of=~/pi-meh_usbdisk.img bs=1048576 count=512
 mkdosfs /home/pi/pi-meh_usbdisk.img
 
 cp pi-meh_usb /usr/bin/pi-meh_usb
+
+git clone https://github.com/jonberenguer/hardpass-sendHID.git
+cd hardpass-sendHID
+make && make install
+
+reboot
+
