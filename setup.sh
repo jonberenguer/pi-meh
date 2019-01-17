@@ -2,6 +2,10 @@
 
 apt-get install -y dnsmasq 
 
+git clone https://github.com/jonberenguer/hardpass-sendHID.git
+cd hardpass-sendHID
+make && make install
+
 systemctl disable dnsmasq
 systemctl stop dnsmasq
 
@@ -27,8 +31,5 @@ cp pi-meh_usb /usr/bin/pi-meh_usb
 cp pi-meh.service /etc/systemd/system/pi-meh.service
 systemctl enable pi-meh.service
 
-git clone https://github.com/jonberenguer/hardpass-sendHID.git
-cd hardpass-sendHID
-make && make install
 
 reboot
