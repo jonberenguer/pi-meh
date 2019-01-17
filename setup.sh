@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get install -y dhcpd
+apt-get install -y dnsmasq 
 
 systemctl disable dnsmasq
 systemctl stop dnsmasq
