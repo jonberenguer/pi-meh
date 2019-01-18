@@ -45,3 +45,15 @@ git clone https://github.com/jonberenguer/pi-meh.git && \
   sudo ./setup.sh
 ```
 
+# Pi Pre-built Image
+
+```
+pending upload
+```
+
+
+
+
+
+
+
