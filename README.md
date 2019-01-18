@@ -18,7 +18,7 @@ touch <sdcard>/boot/ssh
 
 Setup the wifi config:
 ```
-cat << 'EOF' > <sdcard>/boot/wpa_supplicant.config
+cat << 'EOF' > <sdcard>/boot/wpa_supplicant.conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=US

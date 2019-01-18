@@ -15,7 +15,7 @@ interface=usb0
 EOF
 
 
-rpi-update
+# rpi-update #comment out looks like this breaks the RNDIS driver for windows.
 
 echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
 echo "dwc2" | sudo tee -a /etc/modules
