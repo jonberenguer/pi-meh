@@ -12,6 +12,8 @@ mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 cat << 'EOF' > /etc/dnsmasq.conf
 interface=usb0      
   dhcp-range=172.16.254.2,172.16.254.2,255.255.255.0,1h
+  dhcp-option=3
+  dhcp-option=6
 EOF
 
 
