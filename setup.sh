@@ -1,20 +1,19 @@
 #!/bin/bash
 
-apt-get install -y dnsmasq 
-
 git clone https://github.com/jonberenguer/hardpass-sendHID.git
 cd hardpass-sendHID
 make && make install
 
-systemctl disable dnsmasq
-systemctl stop dnsmasq
 
+apt-get install -y dnsmasq 
+systemctl disable dnsmasq && systemctl stop dnsmasq
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
 
 cat << 'EOF' > /etc/dnsmasq.conf
 interface=usb0      
   dhcp-range=172.16.254.2,172.16.254.2,255.255.255.0,1h
 EOF
+
 
 rpi-update
 
