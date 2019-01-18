@@ -41,7 +41,8 @@ ssh to your pi and run the following commands:
 ```
 sudo apt-get update && sudo apt-get install -y git
 
-git clone https://github.com/jonberenguer/pi-meh.git && \
+cd /home/pi && \
+  git clone https://github.com/jonberenguer/pi-meh.git && \
   cd pi-meh && \
   sudo ./setup.sh
 ```

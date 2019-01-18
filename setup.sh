@@ -25,11 +25,10 @@ echo "libcomposite" | sudo tee -a /etc/modules
 dd if=/dev/zero of=/home/pi/pi-meh_usbdisk.img bs=1048576 count=128
 mkdosfs /home/pi/pi-meh_usbdisk.img
 
-cd /home/pi/pi-meh
 
-cp pi-meh_usb /usr/bin/pi-meh_usb
+cp /home/pi/pi-meh/pi-meh_usb /usr/bin/pi-meh_usb
+cp /home/pi/pi-meh/pi-meh.service /etc/systemd/system/pi-meh.service
 
-cp pi-meh.service /etc/systemd/system/pi-meh.service
 systemctl enable pi-meh.service
 
 
