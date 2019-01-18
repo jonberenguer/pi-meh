@@ -49,10 +49,7 @@ cd /home/pi && \
 
 # Pi Pre-built Image
 
-```
-pending upload
-```
-
+[Click Here for Releases and Images](https://github.com/jonberenguer/pi-meh/releases)
 
 
 
