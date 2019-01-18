@@ -15,7 +15,10 @@ interface=usb0
 EOF
 
 
-# rpi-update #comment out looks like this breaks the RNDIS driver for windows.
+# must be kernel 4.14.90
+# commit id found: https://github.com/Hexxeh/rpi-firmware/commits/master
+# rpi-update <commit id>
+rpi-update da5948d
 
 echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
 echo "dwc2" | sudo tee -a /etc/modules
