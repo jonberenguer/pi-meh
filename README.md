@@ -5,6 +5,8 @@ raspberry pi - Mass storage, Ethernet and HID
 tested with:
 2018-11-13-raspbian-stretch-lite
 
+tested on:
+pi zero w
 
 # Post imaging, enable headless mode
 
