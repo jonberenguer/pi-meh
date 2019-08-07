@@ -7,10 +7,19 @@ echo 0x1d6b > idVendor # Linux Foundation
 echo 0x0104 > idProduct # Multifunction Composite Gadget
 echo 0x0100 > bcdDevice # v1.0.0
 echo 0x0200 > bcdUSB # USB2
+echo "0x02" > bDeviceClass
+echo "0x00" > bDeviceSubClass
+
+#Windows extensions to force config
+echo "1" > os_desc/use
+echo "0xcd" > os_desc/b_vendor_code
+echo "MSFT100" > os_desc/qw_sign
+
 mkdir -p strings/0x409
 echo "fedcba9876543210" > strings/0x409/serialnumber
 echo "pi-meh" > strings/0x409/manufacturer
 echo "pi-meh.io USB Device" > strings/0x409/product
+
 mkdir -p configs/c.1/strings/0x409
 echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
@@ -27,7 +36,7 @@ echo "RNDIS" > functions/rndis.usb0/os_desc/interface.rndis/compatible_id
 echo "5162001" > functions/rndis.usb0/os_desc/interface.rndis/sub_compatible_id
 echo $HOST > functions/rndis.usb0/host_addr
 echo $SELF > functions/rndis.usb0/dev_addr
-ln -s functions/rndis.usb0 configs/c.1
+#ln -s functions/rndis.usb0 configs/c.1		#commented: moved 
 
 
 #hid
@@ -36,7 +45,7 @@ echo 1 > functions/hid.usb0/protocol
 echo 1 > functions/hid.usb0/subclass
 echo 8 > functions/hid.usb0/report_length
 echo -ne \\x05\\x01\\x09\\x06\\xa1\\x01\\x05\\x07\\x19\\xe0\\x29\\xe7\\x15\\x00\\x25\\x01\\x75\\x01\\x95\\x08\\x81\\x02\\x95\\x01\\x75\\x08\\x81\\x03\\x95\\x05\\x75\\x01\\x05\\x08\\x19\\x01\\x29\\x05\\x91\\x02\\x95\\x01\\x75\\x03\\x91\\x03\\x95\\x06\\x75\\x08\\x15\\x00\\x25\\x65\\x05\\x07\\x19\\x00\\x29\\x65\\x81\\x00\\xc0 > functions/hid.usb0/report_desc
-ln -s functions/hid.usb0 configs/c.1/
+#ln -s functions/hid.usb0 configs/c.1/		#commented: moved 
 
 
 #mass storage
@@ -49,14 +58,48 @@ echo 0 > functions/mass_storage.usb0/lun.0/cdrom
 echo 0 > functions/mass_storage.usb0/lun.0/ro
 echo 0 > functions/mass_storage.usb0/lun.0/nofua
 echo $FILE > functions/mass_storage.usb0/lun.0/file
-ln -s functions/mass_storage.usb0 configs/c.1/
+#ln -s functions/mass_storage.usb0 configs/c.1/		#commented: moved 
 
 
 # End functions
+
+
+# setup rndis first
+ln -s functions/rndis.usb0 configs/c.1
+
+# Tell Windows to use config #2
+ln -s configs/c.1 os_desc
+
+#echo "20980000.usb" > UDC
+ls /sys/class/udc > UDC # original line
+
+# Give it time to install
+sleep 5
+
+# yank device
+
+echo "" > UDC
+
+# include other functions
+ln -s functions/hid.usb0 configs/c.1/
+ln -s functions/mass_storage.usb0 configs/c.1/
+
+# Reset bDeviceClass to 0x00
+# This is essential to make it work in Windows 10
+# Basically forces it to use device information
+# in the descriptors versus assuming a particular class.
+
+echo "0x00" > bDeviceClass
+
+# Re-attach the gadget
+#echo "20980000.usb" > UDC
 ls /sys/class/udc > UDC
+
 
 ifconfig usb0 172.16.254.1 netmask 255.255.255.252 up
 #route add -net default gw 172.16.254.2
+
+sleep 2
 
 systemctl start dnsmasq
 
