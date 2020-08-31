@@ -5,12 +5,12 @@ cd hardpass-sendHID
 make && make install
 
 
-apt-get install -y dnsmasq 
+apt-get install -y dnsmasq
 systemctl disable dnsmasq && systemctl stop dnsmasq
-mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
+mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 
 cat << 'EOF' > /etc/dnsmasq.conf
-interface=usb0      
+interface=usb0
   dhcp-range=172.16.254.2,172.16.254.2,255.255.255.0,1h
   dhcp-option=3
   dhcp-option=6
@@ -20,7 +20,7 @@ EOF
 # must be kernel 4.14.90
 # commit id found: https://github.com/Hexxeh/rpi-firmware/commits/master
 # rpi-update <commit id>
-rpi-update da5948d
+#rpi-update da5948d
 
 echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
 echo "dwc2" | sudo tee -a /etc/modules

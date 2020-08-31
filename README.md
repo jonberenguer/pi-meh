@@ -3,6 +3,7 @@ raspberry pi - Mass storage, Ethernet and HID
 
 tested with:
 - 2018-11-13-raspbian-stretch-lite
+- 2020-08-20-raspios-buster-armhf-lite
 
 tested on:
 - pi zero w
@@ -22,7 +23,7 @@ cat << 'EOF' > <sdcard>/boot/wpa_supplicant.conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=US
- 
+
 network={
 	ssid="YOURSSID"
 	psk="YOURPASSWORD"
