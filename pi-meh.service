@@ -1,6 +1,6 @@
 [Unit]
 Description=pi-meh
-After=network.target
+After=dnsmasq.service
 
 [Service]
 ExecStart=/usr/bin/pi-meh_usb
